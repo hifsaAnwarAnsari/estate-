@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estates Detail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/brands.min.css" />
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+    <nav class="navbar nav_sider navbar-light bg-light navbar-expand-lg ">
+        <div class="container-fluid">
+            <a class="navbar-brand " href="#">Estates</a>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Buy</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#">Sell</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Rent</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    </ul>
+                    <form class="d-flex">
+                        <div class="nav_bar_right">
+                            <div class="notifications">
+                                <div class="icon_wrap"><i class="far fa-bell"></i>
+                                    <div class="value_notify"></div>
+                                </div>
+                            </div>
+                            <div class="profile">
+                                <div class="icon_wrap">
+                                    <img src="./images/profile_pic.png" alt="profile_pic">
+                                    <span class="name">John Alex</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="property-details"></div>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script>
+        // Example property data (should come from your data source)
+        
+
+        const property = [
+    {
+        id: 1,
+        title: "Chic Loft in Manhattan",
+        type: "sale",
+        propertystatus: "apartment",
+        room: 2,
+        address: [{ street: "240 Mercer St, New York, NY 10012, USA", latitude: 40.727950, longitude: -73.995650 }],
+        description: "A stylish loft with high ceilings and panoramic city views, perfect for urban living.",
+        floorArea: "95 sq/m",
+        furnishing: "Furnished",
+        bath: 4,
+        carparking: 1,
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Alex Johnson",
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            email: "alex.johnson@nyrealty.com",   phone:12345,
+            experience: "8 years",
+            languages: "English",
+            rating:3.4
+        }],
+        rentEstimate: 40000,
+        coverimage: "https://images.pexels.com/photos/9472589/pexels-photo-9472589.jpeg",
+        images: [
+             " https://images.pexels.com/photos/10758467/pexels-photo-10758467.jpeg",
+             " https://images.pexels.com/photos/10758468/pexels-photo-10758468.jpeg ",
+             " https://images.pexels.com/photos/10758466/pexels-photo-10758466.jpeg ",
+           ,
+        ],
+        sugImage: "https://images.pexels.com/photos/9472589/pexels-photo-9472589.jpeg",
+
+        addedOn: "2023-10-20"
+    },
+    {
+        id: 2,
+        title: "Tropical Villa Retreat in Bali",
+        type: "rent",
+        propertystatus: "house",
+        bath: 4,
+        room: 4,
+        carparking: 1,
+        address: [{ street: "610 E 20th St, New York, NY 10009, USA", latitude: 40.732769, longitude: -73.975197 }],
+        description: "A stunning beachfront villa with private access to the beach, ideal for relaxation.",
+        floorArea: "300 sq/m",
+        furnishing: "Fully furnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Fiona MacDonald",
+            email: "fiona.macdonald@scottishproperties.com",  
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            phone:12345,
+            experience: "10 years",
+            languages: "English",
+            rating:3.9
+        }],
+        rentEstimate: 45000,
+        sugImage: "https://images.pexels.com/photos/5524205/pexels-photo-5524205.jpeg",
+        coverimage:"https://images.pexels.com/photos/5524205/pexels-photo-5524205.jpeg",
+        images: [
+            "https://media.rightmove.co.uk/223k/222287/133596956/222287_mFdvUC6I_IMG_00_0000.png",
+            "https://media.rightmove.co.uk/223k/222287/133596956/222287_mFdvUC6I_IMG_01_0000.png",
+            "https://media.rightmove.co.uk/223k/222287/133596956/222287_mFdvUC6I_IMG_02_0000.png",
+       
+
+        ],
+        addedOn: "2023-09-30"
+    },
+    {
+        id: 3,
+        title: "High-End Condo in Toronto",
+        type: "rent",
+        propertystatus: "apartment",
+        bath: 4,
+        room: 4,
+        carparking: 1,
+        sugImage: "https://images.pexels.com/photos/5502227/pexels-photo-5502227.jpeg",
+        address: [{ street: "Rubin Residence Hall, New York, NY 10003, USA", latitude: 40.732471, longitude: -73.989319 }],
+        description: "A modern condo with stunning skyline views and high-end amenities, ideal for professionals.",
+        floorArea: "80 sq/m",
+        furnishing: "Fully furnished",
+        agentInfo:[{
+            name: "Julia Roberts",
+            email: "julia.roberts@sydneyrealestate.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "12 years",
+            languages: "English",
+            rating:3
+        }],
+        rentEstimate: 35000,
+        
+        coverimage:"https://images.pexels.com/photos/5502227/pexels-photo-5502227.jpeg",
+        images: [
+            " https://images.pexels.com/photos/1743231/pexels-photo-1743231.jpeg",
+            " https://images.pexels.com/photos/3741315/pexels-photo-3741315.jpeg ",
+            " https://images.pexels.com/photos/3741317/pexels-photo-3741317.jpeg",
+         
+        ],
+        addedOn: "2023-10-15"
+    },
+    {
+        id: 4,
+        title: "Charming Family Cottage in Edinburgh",
+        type: "sale",
+        propertystatus: "house",
+        room: 3,
+        carparking: 1,
+        bath: 3,
+        address: [{ street: "47 W 13th St, New York, NY 10011, USA", latitude: 40.820240, longitude: -73.935944 }],
+        description: "A charming cottage with historic features and a lovely garden, perfect for families.",
+        floorArea: "120 sq/m",
+        furnishing: "Partially furnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Liam Thompson",
+            email: "liam.thompson@torontoproperties.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "6 years",
+            languages: "English",
+            rating:3.4
+        }],
+        rentEstimate: 50000,
+        coverimage:"https://images.pexels.com/photos/14509975/pexels-photo-14509975.jpeg",
+        sugImage: "https://images.pexels.com/photos/14509975/pexels-photo-14509975.jpeg",
+        images: [
+            "https://images.pexels.com/photos/1571451/pexels-photo-1571451.jpeg",
+            "https://images.pexels.com/photos/3958958/pexels-photo-3958958.jpeg",
+            " https://images.pexels.com/photos/3741312/pexels-photo-3741312.jpeg ",
+          
+        ],
+        addedOn: "2023-08-30"
+    },
+
+    {
+        id: 5,
+        title: "Family-Oriented Home in Sydney",
+        type: "sale",
+        propertystatus: "house",
+        bath: 4,
+        room: 4, carparking: 1,
+        address: [{ street: "Metrotech Center, Brooklyn, NY 11201, USA", latitude: 40.693710, longitude: -73.987221 }],
+        description: "A spacious family home with a backyard and close proximity to the beach.",
+        floorArea: "200 sq/m",
+        furnishing: "Unfurnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Pierre Dupont",
+            email: "pierre.dupont@parisproperties.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "7 years",
+            languages: "English",
+            rating:5
+        }],
+        rentEstimate: 30000,
+        coverimage:"https://images.pexels.com/photos/8092380/pexels-photo-8092380.jpeg",
+        sugImage: " https://images.pexels.com/photos/8092380/pexels-photo-8092380.jpeg",
+        images: [
+            "https://images.pexels.com/photos/20296321/pexels-photo-20296321.jpeg",
+            "https://images.pexels.com/photos/1571448/pexels-photo-1571448.jpeg",
+            "https://media.rightmove.co.uk/223k/222287/133596956/222287_mFdvUC6I_IMG_03_0000.png",
+          
+
+        ],
+        addedOn: "2023-09-29"
+    },
+    {
+        id: 6,
+        title: "Stylish Flat in Paris",
+        type: "rent",
+        propertystatus: "apartment",
+        bath: 5, carparking: 1,
+        room: 5,
+        address: [{ street: "433 1st Ave, New York, NY 10010, USA", latitude: 40.738770, longitude: -73.977570 }],
+        description: "An elegant flat with historic charm and modern amenities, perfect for singles or couples.",
+        floorArea: "50 sq/m",
+        furnishing: "Furnished",
+        agentInfo: [{
+            name: "Sarah Williams",
+            email: "sarah.williams@coloradoproperties.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "4 years",
+            languages: "English",
+            rating:4
+        }],
+        rentEstimate: 45000,
+        sugImage: " https://images.pexels.com/photos/2962124/pexels-photo-2962124.jpeg",
+        coverimage:" https://images.pexels.com/photos/2962124/pexels-photo-2962124.jpeg",
+        images: [
+            "https://images.pexels.com/photos/1571456/pexels-photo-1571456.jpeg",
+            "https://images.pexels.com/photos/1571455/pexels-photo-1571455.jpeg",
+            "https://images.pexels.com/photos/1571454/pexels-photo-1571454.jpeg",
+        
+        ],
+        addedOn: "2023-10-12"
+    },
+    {
+        id: 7,
+        title: "Serene Cabin in Colorado",
+        type: "sale",
+        propertystatus: "house",
+        bath: 5, carparking: 1,
+        room: 5,
+        address: [{ street: "11 W 53rd St, New York, NY 10019", latitude: 40.761002, longitude: -73.976990 }],
+        description: "A cozy rustic cabin surrounded by nature, ideal for weekend getaways.",
+        floorArea: "70 sq/m",
+        furnishing: "Partially furnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Kenji Tanaka",
+            email: "kenji.tanaka@tokyoproperties.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "9 years",
+            languages: "English",
+            rating:3.2
+        }],
+        rentEstimate: 65000,
+        sugImage: "https://images.pexels.com/photos/5524336/pexels-photo-5524336.jpeg",
+        coverimage:"https://images.pexels.com/photos/5524336/pexels-photo-5524336.jpeg",
+        images: [
+            "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg",
+            "https://images.pexels.com/photos/817788/pexels-photo-817788.jpeg",
+            "https://images.pexels.com/photos/1571458/pexels-photo-1571458.jpeg",
+           
+        ],
+        addedOn: "2023-09-20"
+    },
+    {
+        id: 8,
+        title: "Urban Apartment in Tokyo",
+        type: "rent",
+        propertystatus: "apartment",
+        bath: 4, carparking: 1,
+        room: 4,
+        address: [{ street: "30 Mall Dr, Jersey City, NJ 07310", latitude: 40.727161, longitude: -74.038742 }],
+        description: "A contemporary apartment with modern designs and great access to public transport.",
+        floorArea: "85 sq/m",
+        furnishing: "Fully furnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Lukas Schmidt",
+            email: "lukas.schmidt@berlinrealty.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "5 years",
+            languages: "English",
+            rating:6
+        }],
+        rentEstimate: 55000,
+        sugImage: " https://images.pexels.com/photos/27277237/pexels-photo-27277237/free-photo-of-a-house-with-a-garage-and-driveway-in-front-of-it.jpeg",
+        coverimage: " https://images.pexels.com/photos/27277237/pexels-photo-27277237/free-photo-of-a-house-with-a-garage-and-driveway-in-front-of-it.jpeg",
+
+        images: [
+            "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg",
+            "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg",
+            "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg",
+           
+        ],
+        addedOn: "2023-09-28"
+    },
+    {
+        id: 9,
+        title: "Chic Apartment in Berlin",
+        type: "rent",
+        propertystatus: "apartment",
+        room: 5,
+        bath: 5,
+        carparking: 1,
+        address: [{ street: "sea cliff", latitude: 40.849129, longitude: -73.644829  }],
+        description: "A stylish apartment in the heart of Berlin, featuring modern interiors and city views.",
+        floorArea: "120 sq/m",
+        furnishing: "Furnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Thandiwe Ndlovu",
+            email: "thandiwe.ndlovu@capetownproperties.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "7 years",
+            languages: "English",
+            rating:5.5
+        }],
+        rentEstimate: 75000,
+        sugImage: " https://images.pexels.com/photos/8092385/pexels-photo-8092385.jpeg",
+        coverimage: " https://images.pexels.com/photos/8092385/pexels-photo-8092385.jpeg",
+        images: [
+
+            "https://images.pexels.com/photos/817782/pexels-photo-817782.jpeg",
+            "https://images.pexels.com/photos/817787/pexels-photo-817787.jpeg",
+            "https://images.pexels.com/photos/817785/pexels-photo-817785.jpeg",
+        ],
+        addedOn: "2023-10-11"
+    },
+    {
+        id: 10,
+        title: "Modern Apartment in Berlin",
+        type: "sale",
+        propertystatus: "apartment",
+        bath: 4,
+        carparking: 1,
+        room: 4,
+        address: [{ street: "90-15 Queens Blvd, Elmhurst, NY 11373", latitude: 40.736752, longitude: -73.878441 }],
+        description: "A stylish apartment in the heart of Berlin, featuring modern interiors and city views.",
+        floorArea: "65 sq/m",
+        furnishing: "Unfurnished",
+        sugImage: "https://images.pexels.com/photos/208736/pexels-photo-208736.jpeg",
+        coverimage: "https://images.pexels.com/photos/208736/pexels-photo-208736.jpeg",
+
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Thandiwe Ndlovu",
+            email: "thandiwe.ndlovu@capetownproperties.com",
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            phone:12345,
+            experience: "7 years",
+            languages: "English",
+            rating:5.9
+        }],
+        rentEstimate: 4500,
+        images: [
+            "https://images.pexels.com/photos/813700/pexels-photo-813700.jpeg",
+            "https://images.pexels.com/photos/817762/pexels-photo-817762.jpeg",
+            "https://images.pexels.com/photos/813695/pexels-photo-813695.jpeg",
+        ],
+        addedOn: "2023-10-10"
+    }
+];
+
+        // Get the property ID from localStorage
+        const propertyId = localStorage.getItem('selectedPropertyId');
+        
+        // Find the property details
+        const selectedProperty = property.find(prop => prop.id == propertyId);
+        console.log(selectedProperty)
+        const prosec = document.getElementById('property-details');
+        prosec.innerHTML = "";
+        // Render the property details
+       
+        if (selectedProperty) {
+            let  storedata = "";
+            const prosec = document.getElementById('property-details');
+    let imagesScroll = selectedProperty.images.map(img => `
+        <img src="${img}" alt="" class="image_scroll_item">
+    `).join('');
+
+    let htmldetail = `
+<div class="propertydetailingSec">
+    <div class="piccover mt-2">
+        <div class="imageCover-sec">
+            <img src="${selectedProperty.coverimage}" class="round-img" alt="">
+            <div class="cover-text">
+                <img src="./images/dimensions.png" alt="" class="icon-view">
+            </div>
+            <div class="bg-share-btn">
+                <button class="" id="Sharebtn${selectedProperty.id}" onclick="funShare()">
+                    <i class="fa-solid fa-share"></i>
+                </button>
+                <div class="popupshare " id="popup${selectedProperty.id}">
+                    <ul class="d-flex justify-content-around">
+                        <li>
+                            <a href="#" style="color: rgb(79, 153, 213) "><i class="fa-brands fa-twitter "
+                                    style="font-size:25px"></i></a>
+                        </li>
+                        <li>
+                            <a href="#" style="color: rgb(34, 173, 34)"><i class="fa-brands fa-whatsapp"
+                                    style="font-size:25px"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tooltip-messages">
+                <div class="from-them">
+                    <p class="textbubble">Interested?<br>Check out Room tour</p>
+                </div>
+            </div>
+            <div class="img-scroll-box">
+                <div class="d-flex justify-content-between ">
+                    ${imagesScroll}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xm-12">
+                <div class="detail-about-property ">
+
+                    <div class="row">
+                        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-xm-12">
+                            <h5 class="heading-lg mb-2">${selectedProperty.title}</h5>
+                            <div class="location-para mb-2">
+                                <strong>Location:</strong>
+                                <span class="light-type-para">${selectedProperty.address[0].street}</span>
+                            </div>
+                            <div class="home-detail mb-2">
+                                <strong>price:</strong><span
+                                    class="light-type-para">${selectedProperty.rentEstimate}</span>
+                            </div>
+                            <div class="home-detail mb-2">
+                                <strong>Description:</strong><span
+                                    class="light-type-para">${selectedProperty.description}</span>
+                            </div>
+
+                            <div class="loction-map">
+                                <div class="card realstateSec">
+                                    <div id="mapox" class="mapox" style="height: 250px; width: 100%;"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="card-footer mt-3 event-footer">
+                                <button class="bg-btn-more" id="">Book Now</button>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xm-12">
+                            <ul class="list-group">
+  <li class=" prodetail list-group-item list-group-item-primary">   
+     <img src="./images/single-bed.png" class="propertyimg mr-3">
+     <span class="light-type">${selectedProperty.room}</span>
+</li>
+  <li class=" prodetail list-group-item list-group-item-success">
+      <img src="./images/maximize.png" class="propertyimg mr-3">
+                                            <span class="light-type">${selectedProperty.floorArea}</span>
+</li>
+  <li class=" prodetail list-group-item list-group-item-danger">  
+    <img src="./images/bath-tab.png" class="propertyimg mr-3">
+                                            <span class="light-type">${selectedProperty.bath}</span></li>
+  <li class=" prodetail list-group-item list-group-item-warning"> <img src="./images/car.png" class="propertyimg mr-3">
+                                            <span class="light-type">${selectedProperty.carparking}</span></li>
+
+
+</ul>
+                            
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xm-12">
+                <div class="detail-about-property ">
+                    <div class="card realstateSec">
+
+                        <div class="Agent-container">
+                            <div class="Agentprofilebox">
+                                <div class="agent-profile">
+                                    <div class="image-box">
+                                        <img src="${selectedProperty.agentInfo[0].image}" class="image-box-size" alt="">
+                                    </div>
+                                    <h2>${selectedProperty.agentInfo[0].name}</h2>
+
+                                    <p class="mb-1"> <strong class="mr-2">Phone:</strong> <span
+                                            class="type-sm">${selectedProperty.agentInfo[0].phone}</span></p>
+                                    <p class="mb-2"> <strong class="mr-2">Experience:</strong> <span
+                                            class="type-sm">${selectedProperty.agentInfo[0].experience}</span></p>
+                                    <p class="mb-2"> <strong class="mr-2">Languages:</strong> <span
+                                            class="type-sm">${selectedProperty.agentInfo[0].languages}</span></p>
+                                    <p class="mb-2"><strong class="mr-2">Rating:</strong> <span
+                                            class="type-sm">${selectedProperty.agentInfo[0].rating}</span></p>
+                                    <p class="mb-2"><strong class="mr-2">Email: </strong> <span
+                                            class="type-sm">${selectedProperty.agentInfo[0].email}</span></p>
+                                    <p><strong
+                                            class="mr-2">Description:</strong>${selectedProperty.agentInfo[0].description}
+                                    </p>
+                                </div>
+
+                                <div class="tabwrapper mt-3">
+                                    <div class="taeb-switch left text-center">
+                                        <div class="taeb active" taeb-direction="left">Message</div>
+                                        <div class="taeb" taeb-direction="right">Follow</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+`;
+storedata += htmldetail;
+
+
+
+        prosec.innerHTML = storedata;
+        } else {
+            document.getElementById('property-details').innerText = "Property not found!";
+        }
+ 
+        function funShare(id) {
+            // Get the specific popup element by ID
+            const popup = document.getElementById(`popup${id}`);
+
+            // Toggle the 'active' class on the popup
+            popup.classList.toggle("active");
+
+            // Close any other open popups (optional)
+            document.querySelectorAll(".popupshare.active").forEach((otherPopup) => {
+                if (otherPopup !== popup) {
+                    otherPopup.classList.remove("active");
+                }
+            });
+        }
+
+       $(function () {
+            var taeb = $(".taeb-switch");
+            taeb.find(".taeb").on("click", function () {
+                var $this = $(this);
+
+                if ($this.hasClass("active")) return;
+
+                var direction = $this.attr("taeb-direction");
+
+                taeb.removeClass("left right").addClass(direction);
+                taeb.find(".taeb.active").removeClass("active");
+                $this.addClass("active");
+            });
+        });
+        // Load Google Maps script dynamically
+function loadGoogleMapsAPI(apiKey, callback) {
+    const script = document.createElement('script');
+    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyAVJiRDZsecoVecl0fiq2xHchQdWihXr3k&callback=initMap";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+}
+
+// Initialize the map with the given latitude and longitude
+function initMap() {
+    const location = {
+        lat: selectedProperty.address[0].latitude,
+        lng: selectedProperty.address[0].longitude
+    };
+
+    const map = new google.maps.Map(document.getElementById('mapox'), {
+        zoom: 15,
+        center: location
+    });
+
+    new google.maps.Marker({
+        position: location,
+        map: map,
+        title: selectedProperty.title
+    });
+}
+
+// Load Google Maps with your API key
+loadGoogleMapsAPI('AIzaSyAVJiRDZsecoVecl0fiq2xHchQdWihXr3k', 'initMap');
+
+       </script>
+</body>
+
+</html>

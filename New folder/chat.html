@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Search</title>
+    <style>
+        .map-container {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <input id="autocomplete" placeholder="Enter a location" type="text" />
+    <button id="searchBtn">Search</button>
+    <div id="map" class="map-container"></div>
+
+    <script>
+        let map;
+        let propertyMarkers = [];
+        let searchMarker;
+        let polygon;
+
+        const property = [
+            { id: 1, address: [{ street: "240 Mercer St, New York, NY 10012, USA", latitude: 40.727950, longitude: -73.995650 }] },
+            { id: 2, address: [{ street: "610 E 20th St, New York, NY 10009, USA", latitude: 40.732769, longitude: -73.975197 }] },
+            { id: 3, address: [{ street: "47 W 13th St, New York, NY 10011, USA", latitude: 40.820240, longitude: -73.935944 }] },
+            { id: 4, address: [{ street: "Rubin Residence Hall, New York, NY 10003, USA", latitude: 40.732471, longitude: -73.989319 }] },
+            { id: 5, address: [{ street: "Metrotech Center, Brooklyn, NY 11201, USA", latitude: 40.693710, longitude: -73.987221 }] },
+            { id: 6, address: [{ street: "433 1st Ave, New York, NY 10010, USA", latitude: 40.738770, longitude: -73.977570 }] },
+            { id: 7, address: [{ street: "11 W 53rd St, New York, NY 10019", latitude: 40.761002, longitude: -73.976990 }] },
+            { id: 8, address: [{ street: "30 Mall Dr, Jersey City, NJ 07310", latitude: 40.727161, longitude: -74.038742 }] },
+            { id: 9, address: [{ street: "90-15 Queens Blvd, Elmhurst, NY 11373", latitude: 40.736752, longitude: -73.878441 }] },
+            { id: 10, address: [{ street: "Whitestone", latitude: 40.781120, longitude: -73.812012 }] },
+        ];
+
+        function initMap() {
+            const firstProperty = property[0].address[0];
+            const initialLocation = { lat: firstProperty.latitude, lng: firstProperty.longitude };
+
+            const mapOptions = {
+                center: initialLocation,
+                zoom: 11,
+            };
+
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            createPropertyMarkers();
+            createPolygon();
+        }
+
+        function createPropertyMarkers() {
+            property.forEach(prop => {
+                const address = prop.address[0];
+
+                const marker = new google.maps.Marker({
+                    position: { lat: address.latitude, lng: address.longitude },
+                    map: map,
+                    title: address.street,
+                });
+                propertyMarkers.push(marker);
+            });
+        }
+
+        function createPolygon(excludeSearchLocation = false) {
+            const vertices = property.map(prop => ({
+                lat: prop.address[0].latitude,
+                lng: prop.address[0].longitude
+            }));
+
+            if (searchMarker && !excludeSearchLocation) {
+                vertices.push({
+                    lat: searchMarker.getPosition().lat(),
+                    lng: searchMarker.getPosition().lng()
+                });
+            }
+
+            if (polygon) {
+                polygon.setMap(null);  // Clear the existing polygon
+            }
+
+            polygon = new google.maps.Polygon({
+                paths: vertices,
+                strokeColor: '#000000',
+                strokeOpacity: 0.8,
+                strokeWeight: 1.5,
+                fillColor: '#000000',
+                fillOpacity: 0.35,
+            });
+
+            polygon.setMap(map);
+        }
+
+        document.getElementById('searchBtn').addEventListener('click', function () {
+            const location = document.getElementById('autocomplete').value;
+            console.log('Search criteria:', { location });
+
+            if (searchMarker) {
+                searchMarker.setMap(null);
+            }
+
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': location }, function(results, status) {
+                if (status === 'OK') {
+                    const searchedLocation = results[0].geometry.location;
+                    map.setCenter(searchedLocation);
+
+                    searchMarker = new google.maps.Marker({
+                        position: searchedLocation,
+                        map: map,
+                        title: location,
+                    });
+
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `<div>${location}</div>`,
+                    });
+                    infoWindow.open(map, searchMarker);
+
+                    // Recreate the polygon after a search, including the searched location
+                    createPolygon();
+                    initAutocomplete();
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        });
+
+        window.onload = function() {
+            initMap();
+            
+        };
+
+        function initAutocomplete() {
+            const input = document.getElementById('autocomplete');
+            const autocomplete = new google.maps.places.Autocomplete(input);
+
+            autocomplete.addListener('place_changed', function () {
+                const place = autocomplete.getPlace();
+                if (place.geometry) {
+                    const location = place.geometry.location;
+                    map.setCenter(location);
+
+                    if (searchMarker) {
+                        searchMarker.setMap(null);
+                    }
+
+                    searchMarker = new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        title: place.name,
+                    });
+
+                    // Recreate the polygon after selecting an autocomplete place
+                    createPolygon();
+                } else {
+                    console.error('Autocomplete place details not available');
+                }
+            });
+        }
+    </script>
+   <script async defer
+   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVJiRDZsecoVecl0fiq2xHchQdWihXr3k&libraries=places&callback=initMap"></script>
+</body>
+</html>

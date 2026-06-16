@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estates</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/brands.min.css" />
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+
+    <nav class="navbar nav_sider navbar-light bg-light navbar-expand-lg ">
+        <div class="container-fluid">
+            <a class="navbar-brand " href="#">Estates</a>
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Buy</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#">Sell</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Rent</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    </ul>
+                    <form class="d-flex">
+                        <div class="nav_bar_right">
+                            <div class="notifications">
+                                <div class="icon_wrap"><i class="far fa-bell"></i>
+                                    <div class="value_notify"></div>
+                                </div>
+                            </div>
+                        
+                            <div class="profile">
+                                <div class="icon_wrap">
+                                    <img src="./images/profile_pic.png" alt="profile_pic">                                 
+                                    <span class="name">John Alex</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="map_sec">
+        <div id="map" class="map-container"></div>
+    </div>
+
+    <div class="option_container">
+        <div class="row sec-part">
+            <div class="col-6">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <div class="Searchdata">
+                            <div class="xoLGzf FkJ4Sc d-flex flex-row justify-content-between align-items-center">
+                                <input id="autocomplete" class="NhWQq" placeholder="Enter a location" type="text" />
+                                <!-- <div class="position-absol d-flex align-items-center justify-content-between"> -->
+                                    <i class="fa fa-search pzfvzf" aria-hidden="true"></i>
+                                    <button class="filldata" onclick="sugresult()">Suggestion Data</button>
+                                <!-- </div> -->
+                               
+                            </div>
+                        </div>
+                     
+                    </div>
+               
+                    <div class="col-3">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <button id="searchBtn" class="search_btn" onclick="performSearch()">Search</button>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="filterbox">
+                            <i class="fa-solid fa-arrow-down-wide-short filter_icon" onclick="filter_tab_show()"></i>
+                        </div>
+                    </div>
+                </div>
+        
+             
+                <div class="filter-show" id="filter_data" style="display: none;">
+                    <div class="row">
+                        <div class="col-4">
+                            <select id="rooms" class="fontTitleSmall select_tab">
+                                <option value="" class="fontTitleSmall">Please choose an room</option>
+                                <option value="1" class="fontTitleSmall">1</option>
+                                <option value="2" class="fontTitleSmall">2</option>
+                                <option value="3" class="fontTitleSmall">3</option>
+                                <option value="4" class="fontTitleSmall">4</option>
+                                <option value="5" class="fontTitleSmall">5</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <select id="floorArea" class="fontTitleSmall select_tab">
+                                <option value="">Please choose an FloorArea</option>
+                                <option value="50 square metres">50 square metres</option>
+                                <option value="95 square metres">95 square metres</option>
+                                <option value="100 square metres">100 square metres</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+
+                            <select id="type" class="fontTitleSmall select_tab">
+                                <option value="">Please choose an Type</option>
+                                <option value="sale">Sale</option>
+                                <option value="rent">Rent</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <select id="propertyType" class="fontTitleSmall select_tab">
+                                <option value="">Please choose an Property Type</option>
+                                <option value="apartment">Apartment</option>
+                                <option value="house">House</option>
+                            </select>
+                        </div>
+                        <div class="col-4">
+                            <select id="furnished" class="fontTitleSmall select_tab">
+                                <option value="">Please choose an Furnished</option>
+                                <option value="Furnished">Furnished</option>
+                                <option value="Unfurnished">Unfurnished</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="property_sec">
+                    <div class="modal" id="myModal" aria-hidden="true" aria-labelledby="myModalLabel" tabindex="-1">
+                        <div class="modal-dialog modal-dialog-right modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header d-flex justify-content-end p-2">
+
+                                    <button type="button" class="btn btn-dark btn-sm-cancel"
+                                        onclick="close_modal()">Cancel</button>
+
+                                </div>
+                                <div class="modal-body">
+                                    <div class="modal-scrollable">
+                                        <div class="properties--detail"></div>
+                                        <div class="records text-center">
+                                            <span class="recorder_btn" id="recorder_btn"> No records </span>
+                                        </div>
+                                        <h5 class="light-lg-type mt-2">Suggestion Property</h5>
+                                        <div class="suggestion-data">
+                                            <div class=" row sugrow"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        
+        </div>
+
+    </div>
+        <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="locationModalLabel">Missing Input</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Please enter a location.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="resoult-tab">
+            <div class="ul-title">
+                <h6>Suggestion Location</h6>
+            </div>
+            <div class="p-2 scroll-padding-list">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-primary"><strong>1.</strong>240 Mercer St, New York, NY 10012, USA<i class="fa fa-clone copy-icon ml-2" aria-hidden="true"></i></li>
+                    <li class="list-group-item list-group-item-secondary"><strong>2.</strong>610 E 20th St, New York, NY 10009, USA<i class="fa fa-clone copy-icon ml-2" aria-hidden="true"></i></li>
+                    <li class="list-group-item list-group-item-success"><strong>3.</strong>Rubin Residence Hall, New York, NY 10003, USA<i class="fa fa-clone copy-icon ml-2" aria-hidden="true"></i></li>
+                    <li class="list-group-item list-group-item-danger"><strong>4.</strong>47 W 13th St, New York, NY 10011, USA<i class="fa fa-clone copy-icon ml-2" aria-hidden="true"></i></li>
+                    <li class="list-group-item list-group-item-warning"><strong>5.</strong>Metrotech Center, Brooklyn, NY 11201, USA<i class="fa fa-clone copy-icon ml-2" aria-hidden="true"></i></li>
+                    <li class="list-group-item list-group-item-info"><strong>6.</strong>433 1st Ave, New York, NY 10010, USA<i class="fa fa-clone copy-icon ml-2" aria-hidden="true"></i></li>
+                    <li class="list-group-item list-group-item-light"><strong>7.</strong>11 W 53rd St, New York, NY 10019<i class="fa fa-clone copy-icon ml-2" aria-hidden="true"></i></li>
+                    <li class="list-group-item list-group-item-dark"><strong>8.</strong>30 Mall Dr, Jersey City, NJ 07310<i class="fa fa-clone copy-icon ml-2" aria-hidden="true"></i></li>
+                    <li class="list-group-item list-group-item-primary"><strong>9.</strong>sea cliff<i class="fa fa-clone copy-icon ml-2" aria-hidden="true"></i></li>
+                    <li class="list-group-item list-group-item-secondary"><strong>10.</strong>90-15 Queens Blvd, Elmhurst, NY 11373<i class="fa fa-clone copy-icon ml-2" aria-hidden="true"></i></li>
+                </ul>
+            </div>
+        </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+const resultTab = document.querySelector('.resoult-tab');
+function sugresult() {
+    resultTab.classList.add('show'); 
+}
+
+function redirectToDetails(propertyId) {
+    localStorage.setItem('selectedPropertyId', propertyId); // Save the ID
+    window.location.href = 'propertydata.html'; // Redirect to the details page
+}
+
+//  copy list
+
+const copyIcons = document.querySelectorAll('.copy-icon');
+
+// Function to copy the address text to clipboard
+function copyToClipboard(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+}
+
+// Add click event listeners to each copy icon and text
+copyIcons.forEach((icon) => {
+    icon.addEventListener('click', function() {
+        // Get only the address text, ignoring the icon and "Copy" text
+        const textToCopy = icon.closest('li').querySelector('strong').nextSibling.textContent.trim();
+        copyToClipboard(textToCopy);
+        alert('Copied: ' + textToCopy); // Optional: alert to show the copied text
+    });
+});
+
+
+
+
+
+
+
+let map;
+        let propertyMarkers = [];
+        let searchMarker;
+        let polygon;
+
+        const property = [
+    {
+        id: 1,
+        title: "Chic Loft in Manhattan",
+        type: "sale",
+        propertystatus: "apartment",
+        room: 2,
+        address: [{ street: "240 Mercer St, New York, NY 10012, USA", latitude: 40.727950, longitude: -73.995650 }],
+        description: "A stylish loft with high ceilings and panoramic city views, perfect for urban living.",
+        floorArea: "95 sq/m",
+        furnishing: "Furnished",
+        bath: 4,
+        carparking: 1,
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Alex Johnson",
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            email: "alex.johnson@nyrealty.com",   phone:12345,
+            experience: "8 years",
+            languages: "English",
+            rating:3.4
+        }],
+        rentEstimate: 40000,
+        coverimage: "https://images.pexels.com/photos/9472589/pexels-photo-9472589.jpeg",
+        images: [
+             " https://images.pexels.com/photos/10758467/pexels-photo-10758467.jpeg",
+             " https://images.pexels.com/photos/10758468/pexels-photo-10758468.jpeg ",
+             " https://images.pexels.com/photos/10758466/pexels-photo-10758466.jpeg ",
+           ,
+        ],
+        sugImage: "https://images.pexels.com/photos/9472589/pexels-photo-9472589.jpeg",
+
+        addedOn: "2023-10-20"
+    },
+    {
+        id: 2,
+        title: "Tropical Villa Retreat in Bali",
+        type: "rent",
+        propertystatus: "house",
+        bath: 4,
+        room: 4,
+        carparking: 1,
+        address: [{ street: "610 E 20th St, New York, NY 10009, USA", latitude: 40.732769, longitude: -73.975197 }],
+        description: "A stunning beachfront villa with private access to the beach, ideal for relaxation.",
+        floorArea: "300 sq/m",
+        furnishing: "Fully furnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Fiona MacDonald",
+            email: "fiona.macdonald@scottishproperties.com",  
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            phone:12345,
+            experience: "10 years",
+            languages: "English",
+            rating:3.9
+        }],
+        rentEstimate: 45000,
+        sugImage: "https://images.pexels.com/photos/5524205/pexels-photo-5524205.jpeg",
+        coverimage:"https://images.pexels.com/photos/5524205/pexels-photo-5524205.jpeg",
+        images: [
+            "https://media.rightmove.co.uk/223k/222287/133596956/222287_mFdvUC6I_IMG_00_0000.png",
+            "https://media.rightmove.co.uk/223k/222287/133596956/222287_mFdvUC6I_IMG_01_0000.png",
+            "https://media.rightmove.co.uk/223k/222287/133596956/222287_mFdvUC6I_IMG_02_0000.png",
+       
+
+        ],
+        addedOn: "2023-09-30"
+    },
+    {
+        id: 3,
+        title: "High-End Condo in Toronto",
+        type: "rent",
+        propertystatus: "apartment",
+        bath: 4,
+        room: 4,
+        carparking: 1,
+        sugImage: "https://images.pexels.com/photos/5502227/pexels-photo-5502227.jpeg",
+        address: [{ street: "Rubin Residence Hall, New York, NY 10003, USA", latitude: 40.732471, longitude: -73.989319 }],
+        description: "A modern condo with stunning skyline views and high-end amenities, ideal for professionals.",
+        floorArea: "80 sq/m",
+        furnishing: "Fully furnished",
+        agentInfo:[{
+            name: "Julia Roberts",
+            email: "julia.roberts@sydneyrealestate.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "12 years",
+            languages: "English",
+            rating:3
+        }],
+        rentEstimate: 35000,
+        
+        coverimage:"https://images.pexels.com/photos/5502227/pexels-photo-5502227.jpeg",
+        images: [
+            " https://images.pexels.com/photos/1743231/pexels-photo-1743231.jpeg",
+            " https://images.pexels.com/photos/3741315/pexels-photo-3741315.jpeg ",
+            " https://images.pexels.com/photos/3741317/pexels-photo-3741317.jpeg",
+         
+        ],
+        addedOn: "2023-10-15"
+    },
+    {
+        id: 4,
+        title: "Charming Family Cottage in Edinburgh",
+        type: "sale",
+        propertystatus: "house",
+        room: 3,
+        carparking: 1,
+        bath: 3,
+        address: [{ street: "47 W 13th St, New York, NY 10011, USA", latitude: 40.820240, longitude: -73.935944 }],
+        description: "A charming cottage with historic features and a lovely garden, perfect for families.",
+        floorArea: "120 sq/m",
+        furnishing: "Partially furnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Liam Thompson",
+            email: "liam.thompson@torontoproperties.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "6 years",
+            languages: "English",
+            rating:3.4
+        }],
+        rentEstimate: 50000,
+        coverimage:"https://images.pexels.com/photos/14509975/pexels-photo-14509975.jpeg",
+        sugImage: "https://images.pexels.com/photos/14509975/pexels-photo-14509975.jpeg",
+        images: [
+            "https://images.pexels.com/photos/1571451/pexels-photo-1571451.jpeg",
+            "https://images.pexels.com/photos/3958958/pexels-photo-3958958.jpeg",
+            " https://images.pexels.com/photos/3741312/pexels-photo-3741312.jpeg ",
+          
+        ],
+        addedOn: "2023-08-30"
+    },
+
+    {
+        id: 5,
+        title: "Family-Oriented Home in Sydney",
+        type: "sale",
+        propertystatus: "house",
+        bath: 4,
+        room: 4, carparking: 1,
+        address: [{ street: "Metrotech Center, Brooklyn, NY 11201, USA", latitude: 40.693710, longitude: -73.987221 }],
+        description: "A spacious family home with a backyard and close proximity to the beach.",
+        floorArea: "200 sq/m",
+        furnishing: "Unfurnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Pierre Dupont",
+            email: "pierre.dupont@parisproperties.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "7 years",
+            languages: "English",
+            rating:5
+        }],
+        rentEstimate: 30000,
+        coverimage:"https://images.pexels.com/photos/8092380/pexels-photo-8092380.jpeg",
+        sugImage: " https://images.pexels.com/photos/8092380/pexels-photo-8092380.jpeg",
+        images: [
+            "https://images.pexels.com/photos/20296321/pexels-photo-20296321.jpeg",
+            "https://images.pexels.com/photos/1571448/pexels-photo-1571448.jpeg",
+            "https://media.rightmove.co.uk/223k/222287/133596956/222287_mFdvUC6I_IMG_03_0000.png",
+          
+
+        ],
+        addedOn: "2023-09-29"
+    },
+    {
+        id: 6,
+        title: "Stylish Flat in Paris",
+        type: "rent",
+        propertystatus: "apartment",
+        bath: 5, carparking: 1,
+        room: 5,
+        address: [{ street: "433 1st Ave, New York, NY 10010, USA", latitude: 40.738770, longitude: -73.977570 }],
+        description: "An elegant flat with historic charm and modern amenities, perfect for singles or couples.",
+        floorArea: "50 sq/m",
+        furnishing: "Furnished",
+        agentInfo: [{
+            name: "Sarah Williams",
+            email: "sarah.williams@coloradoproperties.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "4 years",
+            languages: "English",
+            rating:4
+        }],
+        rentEstimate: 45000,
+        sugImage: " https://images.pexels.com/photos/2962124/pexels-photo-2962124.jpeg",
+        coverimage:" https://images.pexels.com/photos/2962124/pexels-photo-2962124.jpeg",
+        images: [
+            "https://images.pexels.com/photos/1571456/pexels-photo-1571456.jpeg",
+            "https://images.pexels.com/photos/1571455/pexels-photo-1571455.jpeg",
+            "https://images.pexels.com/photos/1571454/pexels-photo-1571454.jpeg",
+        
+        ],
+        addedOn: "2023-10-12"
+    },
+    {
+        id: 7,
+        title: "Serene Cabin in Colorado",
+        type: "sale",
+        propertystatus: "house",
+        bath: 5, carparking: 1,
+        room: 5,
+        address: [{ street: "11 W 53rd St, New York, NY 10019", latitude: 40.761002, longitude: -73.976990 }],
+        description: "A cozy rustic cabin surrounded by nature, ideal for weekend getaways.",
+        floorArea: "70 sq/m",
+        furnishing: "Partially furnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Kenji Tanaka",
+            email: "kenji.tanaka@tokyoproperties.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "9 years",
+            languages: "English",
+            rating:3.2
+        }],
+        rentEstimate: 65000,
+        sugImage: "https://images.pexels.com/photos/5524336/pexels-photo-5524336.jpeg",
+        coverimage:"https://images.pexels.com/photos/5524336/pexels-photo-5524336.jpeg",
+        images: [
+            "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg",
+            "https://images.pexels.com/photos/817788/pexels-photo-817788.jpeg",
+            "https://images.pexels.com/photos/1571458/pexels-photo-1571458.jpeg",
+           
+        ],
+        addedOn: "2023-09-20"
+    },
+    {
+        id: 8,
+        title: "Urban Apartment in Tokyo",
+        type: "rent",
+        propertystatus: "apartment",
+        bath: 4, carparking: 1,
+        room: 4,
+        address: [{ street: "30 Mall Dr, Jersey City, NJ 07310", latitude: 40.727161, longitude: -74.038742 }],
+        description: "A contemporary apartment with modern designs and great access to public transport.",
+        floorArea: "85 sq/m",
+        furnishing: "Fully furnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Lukas Schmidt",
+            email: "lukas.schmidt@berlinrealty.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "5 years",
+            languages: "English",
+            rating:6
+        }],
+        rentEstimate: 55000,
+        sugImage: " https://images.pexels.com/photos/27277237/pexels-photo-27277237/free-photo-of-a-house-with-a-garage-and-driveway-in-front-of-it.jpeg",
+        coverimage: " https://images.pexels.com/photos/27277237/pexels-photo-27277237/free-photo-of-a-house-with-a-garage-and-driveway-in-front-of-it.jpeg",
+
+        images: [
+            "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg",
+            "https://images.pexels.com/photos/259588/pexels-photo-259588.jpeg",
+            "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg",
+           
+        ],
+        addedOn: "2023-09-28"
+    },
+    {
+        id: 9,
+        title: "Chic Apartment in Berlin",
+        type: "rent",
+        propertystatus: "apartment",
+        room: 5,
+        bath: 5,
+        carparking: 1,
+        address: [{ street: "sea cliff", latitude: 40.849129, longitude: -73.644829  }],
+        description: "A stylish apartment in the heart of Berlin, featuring modern interiors and city views.",
+        floorArea: "120 sq/m",
+        furnishing: "Furnished",
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Thandiwe Ndlovu",
+            email: "thandiwe.ndlovu@capetownproperties.com",   phone:12345,
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            experience: "7 years",
+            languages: "English",
+            rating:5.5
+        }],
+        rentEstimate: 75000,
+        sugImage: " https://images.pexels.com/photos/8092385/pexels-photo-8092385.jpeg",
+        coverimage: " https://images.pexels.com/photos/8092385/pexels-photo-8092385.jpeg",
+        images: [
+
+            "https://images.pexels.com/photos/817782/pexels-photo-817782.jpeg",
+            "https://images.pexels.com/photos/817787/pexels-photo-817787.jpeg",
+            "https://images.pexels.com/photos/817785/pexels-photo-817785.jpeg",
+        ],
+        addedOn: "2023-10-11"
+    },
+    {
+        id: 10,
+        title: "Modern Apartment in Berlin",
+        type: "sale",
+        propertystatus: "apartment",
+        bath: 4,
+        carparking: 1,
+        room: 4,
+        address: [{ street: "90-15 Queens Blvd, Elmhurst, NY 11373", latitude: 40.736752, longitude: -73.878441 }],
+        description: "A stylish apartment in the heart of Berlin, featuring modern interiors and city views.",
+        floorArea: "65 sq/m",
+        furnishing: "Unfurnished",
+        sugImage: "https://images.pexels.com/photos/208736/pexels-photo-208736.jpeg",
+        coverimage: "https://images.pexels.com/photos/208736/pexels-photo-208736.jpeg",
+
+        agentInfo: [{
+            id: "215858",
+            image: "https://assets.codepen.io/307305/internal/avatars/users/default.png?fit=crop&format=auto&height=80&version=1&width=80",
+            name: "Thandiwe Ndlovu",
+            email: "thandiwe.ndlovu@capetownproperties.com",
+            description:"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, est!",
+            phone:12345,
+            experience: "7 years",
+            languages: "English",
+            rating:5.9
+        }],
+        rentEstimate: 4500,
+        images: [
+            "https://images.pexels.com/photos/813700/pexels-photo-813700.jpeg",
+            "https://images.pexels.com/photos/817762/pexels-photo-817762.jpeg",
+            "https://images.pexels.com/photos/813695/pexels-photo-813695.jpeg",
+        ],
+        addedOn: "2023-10-10"
+    }
+];
+
+
+
+function initMap() {
+            const firstProperty = property[0].address[0];
+            const initialLocation = { lat: firstProperty.latitude, lng: firstProperty.longitude };
+
+            const mapOptions = {
+                center: initialLocation,
+                zoom: 11,
+                mapTypeControl: false, // Disable map type control
+            };
+
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+            createPropertyMarkers();
+            createPolygon();
+        }
+
+        function filter_tab_show() {
+            const filterData = document.getElementById("filter_data");
+            if (filterData.style.display === "block") {
+                filterData.style.display = "none";
+            } else {
+                filterData.style.display = "block";
+            }
+        }
+
+        function createPropertyMarkers() {
+            property.forEach(prop => {
+                const address = prop.address[0];
+
+                const marker = new google.maps.Marker({
+                    position: { lat: address.latitude, lng: address.longitude },
+                    map: map,
+                    title: address.street,
+                });
+                propertyMarkers.push(marker);
+            });
+        }
+
+        function createPolygon(excludeSearchLocation = false) {
+            const vertices = property.map(prop => ({
+                lat: prop.address[0].latitude,
+                lng: prop.address[0].longitude
+            }));
+
+            if (searchMarker && !excludeSearchLocation) {
+                vertices.push({
+                    lat: searchMarker.getPosition().lat(),
+                    lng: searchMarker.getPosition().lng()
+                });
+            }
+
+            if (polygon) {
+                polygon.setMap(null);  // Clear the existing polygon
+            }
+
+            polygon = new google.maps.Polygon({
+                paths: vertices,
+                strokeColor: '#000000',
+                strokeOpacity: 0.8,
+                strokeWeight: 1.5,
+                fillColor: '#000000',
+                fillOpacity: 0.35,
+            });
+
+            polygon.setMap(map);
+        }
+
+        function performSearch() {
+            const location = document.getElementById('autocomplete').value.toLowerCase();
+            const rooms = document.getElementById('rooms').value;
+            const floorArea = document.getElementById('floorArea').value;
+            const type = document.getElementById('type').value;
+            const propertyType = document.getElementById('propertyType').value;
+            const furnished = document.getElementById('furnished').value;
+            
+            if (!location) {
+                const locationModal = new bootstrap.Modal(document.getElementById('locationModal'));
+        locationModal.show();
+        return;
+            }
+
+            // Filter properties based on search criteria
+            const filteredProperties = property.filter(prop => {
+                return prop.address[0].street.toLowerCase().includes(location) &&
+                    (!rooms || prop.room == rooms) &&
+                    (!floorArea || prop.floorArea === floorArea) &&
+                    (!type || prop.type === type) &&
+                    (!propertyType || prop.propertystatus === propertyType) &&
+                    (!furnished || prop.furnishing.toLowerCase() === furnished.toLowerCase());
+            });
+
+            // Display filtered properties and open the modal
+            displayFilteredProperties(filteredProperties);
+            displaySuggestion()
+            // Show modal if there are matching properties or a "No records" message
+            const modal = document.getElementById('myModal');
+            if (filteredProperties.length > 0) {
+                modal.style.display = 'block';
+
+            } else {
+                modal.style.display = 'block'; // Show modal even if no results to show "No records"
+
+            }
+
+            if (searchMarker) {
+                searchMarker.setMap(null);
+            }
+
+            const geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': location }, function (results, status) {
+                if (status === 'OK') {
+                    const searchedLocation = results[0].geometry.location;
+                    map.setCenter(searchedLocation);
+
+                    searchMarker = new google.maps.Marker({
+                        position: searchedLocation,
+                        map: map,
+                        title: location,
+                    });
+
+                    const infoWindow = new google.maps.InfoWindow({
+                        content: `<div>${location}</div>`,
+                    });
+                    infoWindow.open(map, searchMarker);
+
+                    // Recreate the polygon after a search
+                    createPolygon();
+                    initAutocomplete(); // Ensure autocomplete is set up for the new location
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+            // Rest of your geolocation and modal opening code...
+            // This code block should handle the location geocoding and the modal display as in the original function.
+        }
+
+        function displayFilteredProperties(filteredProperties) {
+            const data_property = document.querySelector('.properties--detail');
+            data_property.innerHTML = "";
+
+            if (filteredProperties.length > 0) {
+                document.getElementById("recorder_btn").style.display = "none";
+                let apidata = "";
+
+                filteredProperties.forEach((prop) => {
+                    let imagesHtml = prop.images.map(img => `
+                <div class="swiper-slide">
+                    <img src="${img}" class="image_slider" alt="">
+                </div>
+            `).join('');
+
+
+                    let htmlSegment = `
+                    
+                <div class="searchresult">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="swiper mySwiper">
+                            <div class="image_view">
+                                <div class="d-flex justify-content-between">
+                                    <div class="View_value_Image">
+                                        <span class="value_img">4.8</span>
+                                    </div>
+                                    <div class="ViewImage">
+                                        <img src="./images/dimensions.png" alt="" class="icon-view">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-wrapper">
+                                ${imagesHtml}
+                            </div>
+                            <div class="data_pagination">
+                                <div class="swiper-pagination"></div>
+                                <div class="autoplay-progress">
+                                    <svg viewBox="0 0 48 48">
+                                        <circle cx="24" cy="24" r="20"></circle>
+                                    </svg>
+                                    <span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="share-detail mb-2">
+                            <div class="d-flex justify-content-between align-content-item-center">
+                                <span class="light-type-para full_text">Most popular</span>
+                                <span class="gray-type text-end">Share <img src="./images/share.png" class="icon_share"></span>
+                            </div>
+                        </div>
+                        <div class="property_detail_box">
+                            <h5 class="light-lg-type mb-2">${prop.title}</h5>
+                            <div class="location-para mb-2">
+                                <img src="./images/location.png" alt="" class="location-sm-icon">
+                                <span class="light-type-para">${prop.address[0].street}</span>
+                            </div>
+                            <div class="home-detail-item mb-2">
+                                <div class="d-flex align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <img src="./images/single-bed.png" class="sm-icon">
+                                        <span class="light-type ml-gap">${prop.room}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <img src="./images/bath-tab.png" class="sm-icon">
+                                        <span class="light-type ml-gap">${prop.bath}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <img src="./images/car.png" class="sm-icon">
+                                        <span class="light-type ml-gap">${prop.carparking}</span>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <img src="./images/maximize.png" class="sm-icon">
+                                        <span class="light-type ml-gap">${prop.floorArea}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="home-detail mb-2">
+                                <span class="light-type-para">${prop.description}</span>
+                            </div>
+                            <div class="price-home mt-4">
+                                 <strong >Rental price: ${prop.rentEstimate}</strong>
+                                 <div class="appy-home mt-3">
+                                <button class="btn btn-dark btn_font" onclick="redirectToDetails(${prop.id})" id="detailbtn${prop.id}">Show Contacts</button>
+                            </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+                </div>
+                 
+            `;
+                    apidata += htmlSegment;
+                });
+
+                data_property.innerHTML = apidata;
+                const progressCircle = document.querySelector(".autoplay-progress svg");
+                const progressContent = document.querySelector(".autoplay-progress span");
+                // Initialize Swiper after adding content
+                const swiper = new Swiper(".mySwiper", {
+                    spaceBetween: 30,
+                    centeredSlides: true,
+                    autoplay: {
+                        delay: 2500,
+                        disableOnInteraction: false
+                    },
+                    pagination: {
+                        el: ".swiper-pagination",
+                        dynamicBullets: true,
+                        clickable: true
+                    },
+                    on: {
+                        autoplayTimeLeft(s, time, progress) {
+                            progressCircle.style.setProperty("--progress", 1 - progress);
+                            progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+                        }
+                    }
+                });
+            } else {
+                document.querySelector('.properties--detail').style.display = "none";
+                document.getElementById("recorder_btn").style.display = "block";
+            }
+        }
+
+        function close_modal() {
+            const modal = document.getElementById('myModal');
+
+            modal.style.display = 'none';
+
+        }
+
+        window.onload = function () {
+            initMap();
+        };
+
+        function initAutocomplete() {
+            const input = document.getElementById('autocomplete');
+            const autocomplete = new google.maps.places.Autocomplete(input);
+            autocomplete.addListener('place_changed', function () {
+                const place = autocomplete.getPlace();
+                if (place.geometry) {
+                    const location = place.geometry.location;
+                    map.setCenter(location);
+
+                    if (searchMarker) {
+                        searchMarker.setMap(null);
+                    }
+
+                    searchMarker = new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        title: place.name,
+                    });
+
+                    // Recreate the polygon after selecting an autocomplete place
+                    createPolygon();
+                } else {
+                    console.error('Autocomplete place details not available');
+                }
+            });
+        }
+
+        function displaySuggestion() {
+            const data_suggstion = document.querySelector('.sugrow');
+            let sugApi = ""; // Initialize sugApi as an empty string
+
+            property.forEach((sugData) => {
+                let Suggesthtml = `
+<div class="col-lg-6 col-md-6 col-sm-12">
+
+    <div class="card event-card">
+        <div class="card-body p-0">
+            <div class=" event-header">
+                <img src="${sugData.sugImage}" alt="" />
+                <p>${sugData.addedOn}</p>
+                <i class="fa-regular fa-heart bxs-heart like-btn"></i>
+            </div>
+            <div class="event-content mt-2">
+                <h5>${sugData.title}</h5>
+                <div class="d-flex justify-content-between mb-1">
+                    <strong class="mb-2">Rental price: ${sugData.rentEstimate}</strong>
+                    <div class="menu-content">
+                        <a href="#" class="mx-2 fa-regular fa-bookmark font-icon"></a>
+                        <a href="#" class="fa-regular fa-comment font-icon"></a>
+                    </div>
+                </div>
+
+                <div class="row mb-2">
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="prodetail">
+                                    <img src="./images/single-bed.png" class="suggestion--icon">
+                                    <span class="light-type ">${sugData.room}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="prodetail">
+                                    <img src="./images/bath-tab.png" class="suggestion--icon">
+                                    <span class="light-type ">${sugData.bath}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 p-0">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="prodetail">
+                                    <img src="./images/car.png" class="suggestion--icon">
+                                    <span class="light-type ">${sugData.carparking}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="prodetail">
+                                    <img src="./images/maximize.png" class="suggestion--icon">
+                                    <span class="light-type  text-center">${sugData.floorArea}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="location-para">
+                    <p class="light-type-para">${sugData.description}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer mt-2 event-footer">
+            <button class="btn-more" id="detailbtn${sugData.id}" onclick="redirectToDetails(${sugData.id})">Read More</button>
+            <div class="btn-group">
+                <div class="share">
+                    <button class="share-btn" id="Sharebtn${sugData.id}" onclick="funShare(${sugData.id})">
+                        <i class="fa-solid fa-share"></i>
+                    </button>
+                    <div class="popupshare " id="popup${sugData.id}">
+                        <ul class="d-flex justify-content-around">
+                            <li>
+                                <a href="#" style="color: rgb(79, 153, 213) "><i class="fa-brands fa-twitter "
+                                        style="font-size:25px"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" style="color: rgb(34, 173, 34)"><i class="fa-brands fa-whatsapp"
+                                        style="font-size:25px"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+`;
+sugApi += Suggesthtml; // Append each generated HTML segment
+            });
+            data_suggstion.innerHTML = sugApi; // Set the HTML for suggestion data container
+        }
+
+        //! Like Buttons
+        const likeBtns = document.querySelectorAll(".like-btn");
+        likeBtns.forEach((likeBtn) => {
+            likeBtn.addEventListener("click", () => {
+                if (likeBtn.classList.contains("fas")) {
+                    // If the icon is already filled, make it unfilled
+                    likeBtn.classList.remove("fas");
+                    likeBtn.classList.add("fa-regular");
+                    likeBtn.classList.remove("bounce-in");
+                } else {
+                    // If the icon is unfilled, make it filled
+                    likeBtn.classList.add("fas");
+                    likeBtn.classList.remove("fa-regular");
+                    likeBtn.classList.add("bounce-in");
+                }
+            });
+        });
+
+        function funShare(id) {
+            // Get the specific popup element by ID
+            const popup = document.getElementById(`popup${id}`);
+
+            // Toggle the 'active' class on the popup
+            popup.classList.toggle("active");
+
+            // Close any other open popups (optional)
+            document.querySelectorAll(".popupshare.active").forEach((otherPopup) => {
+                if (otherPopup !== popup) {
+                    otherPopup.classList.remove("active");
+                }
+            });
+        }
+
+    </script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVJiRDZsecoVecl0fiq2xHchQdWihXr3k&libraries=places&callback=initMap"></script>
+</body>
+
+</html>
